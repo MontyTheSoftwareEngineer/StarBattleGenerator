@@ -197,7 +197,11 @@ class GameBoard {
     while (starsAdded < starsNeededVert && attempts < 20) {
       let newRow = this.rNG.randomInt(0, rows - 1);
 
-      if (this.grid[currentCell[0]][newRow].starEligible) {
+      let rowStarCount = this.countStars([currentCell[0], newRow]);
+      if (
+        this.grid[currentCell[0]][newRow].starEligible &&
+        rowStarCount[0] < this.starDifficulty
+      ) {
         this.grid[currentCell[0]][newRow].state = 1;
         this.markIneligibles([currentCell[0], newRow]);
         starsAdded++;
